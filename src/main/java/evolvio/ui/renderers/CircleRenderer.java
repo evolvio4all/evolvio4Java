@@ -1,12 +1,12 @@
-package evolvio.render.renderers;
+package evolvio.ui.renderers;
 
-import evolvio.render.Circle;
-import evolvio.render.IRenderer;
+import evolvio.ui.Renderer;
+import evolvio.ui.domain.Circle;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class CircleRenderer implements IRenderer<Circle> {
+public class CircleRenderer implements Renderer<Circle> {
     @Override
     public void render(Graphics2D graphics, Circle rendered) {
         Color color = rendered.getColor();
