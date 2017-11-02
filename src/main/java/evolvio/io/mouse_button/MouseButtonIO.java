@@ -7,10 +7,10 @@ import java.util.function.BiConsumer;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
 public class MouseButtonIO extends GLFWMouseButtonCallback {
-    private final ConcurrentLinkedQueue<BiConsumer<MouseButton, MouseButtonAction>> commandQueue;
+    private final ConcurrentLinkedQueue<Runnable> commandQueue;
     private final Map<MouseButton, Map<MouseButtonAction, BiConsumer<MouseButton, MouseButtonAction>>> mouseButtonCommands = new ConcurrentHashMap<>();
 
-    public MouseButtonIO(ConcurrentLinkedQueue<BiConsumer<MouseButton, MouseButtonAction>> commandQueue) {
+    public MouseButtonIO(ConcurrentLinkedQueue<Runnable> commandQueue) {
         this.commandQueue = commandQueue;
     }
 
@@ -54,7 +54,8 @@ public class MouseButtonIO extends GLFWMouseButtonCallback {
                 if (mouseButtonAction != null) {
                     BiConsumer<MouseButton, MouseButtonAction> command = mouseActionCommands.get(mouseButtonAction);
                     if (command != null) {
-                        commandQueue.add(command);
+                        Runnable queuedAction = () -> command.accept(mouseButton, mouseButtonAction);
+                        commandQueue.add(queuedAction);
                     }
                 }
             }
