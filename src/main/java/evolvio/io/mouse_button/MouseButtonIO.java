@@ -48,11 +48,11 @@ public class MouseButtonIO extends GLFWMouseButtonCallback {
     public void invoke(long window, int mouseButtonCode, int mouseActionCode, int mods) {
         MouseButton mouseButton = MouseButton.fromCode(mouseButtonCode);
         if (mouseButton != null) {
-            Map<MouseButtonAction, BiConsumer<MouseButton, MouseButtonAction>> MouseActionCommands = mouseButtonCommands.get(mouseButton);
-            if (MouseActionCommands != null) {
+            Map<MouseButtonAction, BiConsumer<MouseButton, MouseButtonAction>> mouseActionCommands = mouseButtonCommands.get(mouseButton);
+            if (mouseActionCommands != null) {
                 MouseButtonAction mouseButtonAction = MouseButtonAction.fromCode(mouseActionCode);
                 if (mouseButtonAction != null) {
-                    BiConsumer<MouseButton, MouseButtonAction> command = MouseActionCommands.get(mouseButtonAction);
+                    BiConsumer<MouseButton, MouseButtonAction> command = mouseActionCommands.get(mouseButtonAction);
                     if (command != null) {
                         commandQueue.add(command);
                     }
