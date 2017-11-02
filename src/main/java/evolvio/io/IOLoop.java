@@ -7,6 +7,7 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
 public class IOLoop implements AutoCloseable {
     private final ConcurrentLinkedQueue<Runnable> commandQueue = new ConcurrentLinkedQueue<>();
+    // TODO create user input IO objects when available
     private final GLFWKeyCallback keyCallback = null;
     private final GLFWMouseButtonCallback mouseButtonCallback = null;
     private final GLFWCursorPosCallback mousePositionCallback = null;
