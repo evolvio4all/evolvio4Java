@@ -7,9 +7,9 @@ import java.util.Map;
 import org.lwjgl.glfw.GLFW;
 
 public enum MouseButton {
-    Left(GLFW.GLFW_MOUSE_BUTTON_LEFT),
-    Middle(GLFW.GLFW_MOUSE_BUTTON_MIDDLE),
-    Right(GLFW.GLFW_MOUSE_BUTTON_RIGHT);
+    LEFT(GLFW.GLFW_MOUSE_BUTTON_LEFT),
+    MIDDLE(GLFW.GLFW_MOUSE_BUTTON_MIDDLE),
+    RIGHT(GLFW.GLFW_MOUSE_BUTTON_RIGHT);
     private static final Map<Integer, MouseButton> MOUSE_BUTTONS_BY_CODE = new HashMap<>();
     // the values() method re-creates a new array every time it's called, so cache it here
     private static final List<MouseButton> ALL = Arrays.asList(values());

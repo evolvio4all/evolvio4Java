@@ -7,9 +7,9 @@ import java.util.Map;
 import org.lwjgl.glfw.GLFW;
 
 public enum MouseButtonAction {
-    Press(GLFW.GLFW_PRESS),
-    Repeat(GLFW.GLFW_REPEAT),
-    Release(GLFW.GLFW_RELEASE);
+    PRESS(GLFW.GLFW_PRESS),
+    REPEAT(GLFW.GLFW_REPEAT),
+    RELEASE(GLFW.GLFW_RELEASE);
     private static final Map<Integer, MouseButtonAction> KEY_ACTIONS_BY_CODE = new HashMap<>();
     // the values() method re-creates a new array every time it's called, so cache it here
     private static final List<MouseButtonAction> ALL = Arrays.asList(values());
