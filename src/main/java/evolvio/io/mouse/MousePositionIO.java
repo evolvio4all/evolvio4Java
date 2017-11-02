@@ -5,21 +5,17 @@ import org.lwjgl.glfw.GLFWCursorPosCallback;
 
 public class MousePositionIO extends GLFWCursorPosCallback {
     private final ConcurrentLinkedQueue<Runnable> commandQueue;
-    private BiDoubleConsumer offsetCommand;
+    private final BiDoubleConsumer offsetCommand;
 
-    public MousePositionIO(ConcurrentLinkedQueue<Runnable> commandQueue) {
+    public MousePositionIO(ConcurrentLinkedQueue<Runnable> commandQueue, BiDoubleConsumer offsetCommand) {
         this.commandQueue = commandQueue;
-    }
-
-    public void setCommand(BiDoubleConsumer offsetCommand) {
         this.offsetCommand = offsetCommand;
     }
 
+
     @Override
     public void invoke(long window, double xoffset, double yoffset) {
-        if (offsetCommand != null) {
-            Runnable queuedCommand = () -> offsetCommand.accept(xoffset, yoffset);
-            commandQueue.add(queuedCommand);
-        }
+        Runnable queuedCommand = () -> offsetCommand.accept(xoffset, yoffset);
+        commandQueue.add(queuedCommand);
     }
 }
