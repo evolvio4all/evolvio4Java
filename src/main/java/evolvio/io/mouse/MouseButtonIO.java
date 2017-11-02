@@ -1,4 +1,4 @@
-package evolvio.io.mouse_button;
+package evolvio.io.mouse;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
