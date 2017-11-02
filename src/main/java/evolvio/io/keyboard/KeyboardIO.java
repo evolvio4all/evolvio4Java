@@ -7,10 +7,10 @@ import java.util.function.BiConsumer;
 import org.lwjgl.glfw.GLFWKeyCallback;
 
 public class KeyboardIO extends GLFWKeyCallback {
-    private final ConcurrentLinkedQueue<BiConsumer<Key, KeyAction>> commandQueue;
+    private final ConcurrentLinkedQueue<Runnable> commandQueue;
     private final Map<Key, Map<KeyAction, BiConsumer<Key, KeyAction>>> keyCommands = new ConcurrentHashMap<>();
 
-    public KeyboardIO(ConcurrentLinkedQueue<BiConsumer<Key, KeyAction>> commandQueue) {
+    public KeyboardIO(ConcurrentLinkedQueue<Runnable> commandQueue) {
         this.commandQueue = commandQueue;
     }
 
@@ -54,7 +54,8 @@ public class KeyboardIO extends GLFWKeyCallback {
                 if (keyAction != null) {
                     BiConsumer<Key, KeyAction> command = keyActionCommands.get(keyAction);
                     if (command != null) {
-                        commandQueue.add(command);
+                        Runnable queuedAction = () -> command.accept(key, keyAction);
+                        commandQueue.add(queuedAction);
                     }
                 }
             }
